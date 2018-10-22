@@ -5,7 +5,13 @@ namespace Task1
 {
     class User
     {
-
+        public User(string surname, string name, string patronymic, DateTime birthdate)
+        {
+            Surname = surname;
+            Name = name;
+            Patronymic = patronymic;
+            Birthdate = birthdate;
+        }
 
         private string surname;
 
@@ -36,7 +42,7 @@ namespace Task1
             }
             set
             {
-                string pattern = "\\W\\d";
+                string pattern = "\\W|\\d";
                 if (Regex.IsMatch(value, pattern))
                 {
                     throw new Exception("Invalid expression.");
@@ -55,7 +61,7 @@ namespace Task1
             }
             set
             {
-                string pattern = "\\W\\d";
+                string pattern = "\\W|\\d";
                 if (Regex.IsMatch(value, pattern))
                 {
                     throw new Exception("Invalid expression.");
@@ -76,18 +82,10 @@ namespace Task1
             {
                 if (birthdate > DateTime.Now)
                 {
-                    throw new Exception("Error. Birthdate cannot be greater than tha current date.");
+                    throw new Exception("Error. Birthdate cannot be greater than thе current date.");
                 }
                 birthdate = value;
             }
-        }
-
-        public User(string surname, string name, string patronymic, DateTime birthdate)
-        {
-            Surname = surname;
-            Name = name;
-            Patronymic = patronymic;
-            Birthdate = birthdate;
         }
 
         private int age;

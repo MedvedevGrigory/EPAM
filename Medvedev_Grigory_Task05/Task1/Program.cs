@@ -35,9 +35,9 @@ namespace Task1
                     $"Birthdate - {user.Birthdate.ToShortDateString()}\n" +
                     $"Age - {user.Age}");
             }
-            catch
+            catch(Exception e)
             {
-                Console.WriteLine("Error. Invalid data entered.");
+                Console.WriteLine(e.Message);
             }
             
             Console.ReadKey();
