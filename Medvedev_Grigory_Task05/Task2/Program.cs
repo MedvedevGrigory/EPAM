@@ -9,14 +9,14 @@ namespace Task2
             Point center = new Point();
 
             Console.WriteLine("Enter x:");
-            doubleTryParse(center.x);
+            center.x = doubleTryParse(center.x);
 
             Console.WriteLine("Enter y:");
-            doubleTryParse(center.y);
+            center.y = doubleTryParse(center.y);
 
             Console.WriteLine("Enter radius:");
             double radius = new double();
-            doubleTryParse(radius);
+            radius = doubleTryParse(radius);
 
             try
             {
@@ -35,12 +35,14 @@ namespace Task2
             Console.ReadKey();
         }
 
-        static void doubleTryParse(double value)
+        static double doubleTryParse(double value)
         {
             if (!double.TryParse(Console.ReadLine(), out value))
             {
                 Console.WriteLine("Invalid value. Expected real number.");
             }
+
+            return value;
         }
     }
 }

@@ -22,10 +22,7 @@ namespace Task2
 
         public double Radius
         {
-            get
-            {
-                return radius;
-            }
+            get => radius;
             set
             {
                 if (value <= 0)

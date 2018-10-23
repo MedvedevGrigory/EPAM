@@ -13,21 +13,23 @@ namespace Task1
             Birthdate = birthdate;
         }
 
+        void matchPattern(string value, string error)
+        {
+            string pattern = "\\W|\\d";
+            if (Regex.IsMatch(value, pattern))
+            {
+                throw new Exception($"Invalid {error}.");
+            }
+        }
+
         private string surname;
 
         public string Surname
         {
-            get
-            {
-                return surname;
-            }
+            get => surname;
             set
             {
-                string pattern = "\\W|\\d";
-                if (Regex.IsMatch(value, pattern))
-                {
-                    throw new Exception("Invalid expression.");
-                }
+                matchPattern(value, "surname");
                 surname = value;
             }
         }
@@ -36,17 +38,10 @@ namespace Task1
 
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get => name;
             set
             {
-                string pattern = "\\W|\\d";
-                if (Regex.IsMatch(value, pattern))
-                {
-                    throw new Exception("Invalid expression.");
-                }
+                matchPattern(value, "name");
                 name = value;
             }
         }
@@ -55,17 +50,10 @@ namespace Task1
 
         public string Patronymic
         {
-            get
-            {
-                return patronymic;
-            }
+            get => patronymic;
             set
             {
-                string pattern = "\\W|\\d";
-                if (Regex.IsMatch(value, pattern))
-                {
-                    throw new Exception("Invalid expression.");
-                }
+                matchPattern(value, "patronymic");
                 patronymic = value;
             }
         }
@@ -74,10 +62,7 @@ namespace Task1
 
         public DateTime Birthdate
         {
-            get
-            {
-                return birthdate;
-            }
+            get => birthdate;
             set
             {
                 if (birthdate > DateTime.Now)
