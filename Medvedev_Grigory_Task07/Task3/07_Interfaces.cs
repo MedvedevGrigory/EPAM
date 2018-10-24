@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Task3
 {
-	public static class InterfacesDemo
+    public static class InterfacesDemo
 	{
 		public static void DemoMain(string[] args)
 		{
