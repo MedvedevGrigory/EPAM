@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Task1
 {
-    class DynamicArray<T> where T : new()
+    class DynamicArray<T> : IEnumerable<T> where T : new()
     {
         T[] array;
 
-        public int Capacity { get => array.Length; }
+        public int Capacity => array.Length;
 
-        int length;
-        public int Length { get => length; }
+        public int Length { get; private set; }
 
         public DynamicArray(int size)
         {
@@ -18,7 +19,7 @@ namespace Task1
                 throw new IndexOutOfRangeException();
             }
             array = new T[size];
-            length = 0;
+            Length = 0;
         }
 
         public DynamicArray() : this(8)
@@ -27,19 +28,27 @@ namespace Task1
 
         public DynamicArray(T[] arr) : this(arr.Length)
         {
-            array = arr;
+            array = (T[])arr.Clone();
+        }
+
+        public DynamicArray(IEnumerable<T> arr) : this()
+        {
+            foreach (T item in arr)
+            {
+                Insert(item, Length);
+            }
         }
 
         public void AddRange(T[] arr)
         {
-            if (Capacity - length < arr.Length)
+            if (Capacity - Length < arr.Length)
             {
-                changeSize(arr.Length + length);
+                changeSize(arr.Length + Length);
             }
 
             for (int i = 0; i < arr.Length; i++)
             {
-                array[length++] = arr[i];
+                array[Length++] = arr[i];
             }
         }
 
@@ -51,45 +60,45 @@ namespace Task1
                 return false;
             }
 
-            for (int i = index; i < length; i++)
+            for (int i = index; i < Length; i++)
             {
                 array[i] = array[i + 1];
             }
-            length--;
+            Length--;
 
             return true;
         }
 
         public void Add(T newElement)
         {
-            Insert(newElement, length);
+            Insert(newElement, Length);
         }
 
         public void Insert(T value, int index)
         {
             checkIndex(index);
-            if (length == Capacity)
+            if (Length == Capacity)
             {
                 changeSize();
             }
 
-            for (int i = index; i < length; i++)
+            for (int i = index; i < Length; i++)
             {
                 array[i + 1] = array[i];
             }
             array[index] = value;
-            length++;
+            Length++;
         }
 
         void changeSize()
         {
-            changeSize(length * 2);
+            changeSize(Length * 2);
         }
 
         void changeSize(int count)
         {
             T[] newArray = new T[count];
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < Length; i++)
             {
                 newArray[i] = array[i];
             }
@@ -98,10 +107,20 @@ namespace Task1
 
         void checkIndex(int index)
         {
-            if (index > length || index < 0)
+            if (index > Length || index < 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return ((IEnumerable<T>)array).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return array.GetEnumerator();
         }
 
         public T this[int index]
