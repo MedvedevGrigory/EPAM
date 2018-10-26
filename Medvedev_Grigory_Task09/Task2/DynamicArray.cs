@@ -115,12 +115,15 @@ namespace Task1
 
         public IEnumerator<T> GetEnumerator()
         {
-            return ((IEnumerable<T>)array).GetEnumerator();
+            for (var i = 0; i < Length; i++)
+            {
+                yield return array[i];
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return array.GetEnumerator();
+            return GetEnumerator();
         }
 
         public T this[int index]
