@@ -14,7 +14,7 @@ namespace Task1
         {
             string[] strings = { "aa", "c", "b", "d" };
 
-            Compare compare = new Compare(CompareByLength);
+            Compare compare = new Compare(CompareByLength);         
 
             Sort(strings, compare);
 

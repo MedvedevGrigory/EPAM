@@ -52,9 +52,9 @@ namespace NetBasicsDemo
 		}*/
         public override int GetHashCode()
         {
-            int hashBase = 13;
-            hashBase = (hashBase * 7) + x;
-            hashBase = (hashBase * 7) + y;
+            int hashBase = 111;
+            hashBase = (hashBase * 13) + x - y * hashBase * 29 + x * y * hashBase * 91;
+            //hashBase = (hashBase * 7) + y;
 
             return hashBase;
         }

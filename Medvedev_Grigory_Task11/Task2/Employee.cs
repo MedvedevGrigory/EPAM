@@ -44,12 +44,7 @@ namespace Task1
 
         public bool Equals(Employee other)
         {
-            if (experience == other.experience & salary == other.salary & Position == other.Position) 
-            {
-                return true;
-            }
-
-            return false;
+            return base.Equals(other) && experience == other.experience && salary == other.salary && Position == other.Position;
         }
     }
 }
