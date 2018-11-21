@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Task3
 {
@@ -18,32 +16,32 @@ namespace Task3
 
             List<KeyValuePair<string, double>> wordsList = CountFrequinceWords(text, words);
 
-            PrintWords(wordsList, wordsList.Count);
+            PrintWords(wordsList);
 
             Console.ReadKey();
         }
 
         static List<KeyValuePair<string, double>> CountFrequinceWords(string text, string[] words)
         {
-            List<KeyValuePair<string, double>> keyValuePairs = new List<KeyValuePair<string, double>>();
+            List<KeyValuePair<string, double>> wordsAndFrec = new List<KeyValuePair<string, double>>();
             for (int i = 0; i < words.Length; i++)
             {
                 string pattern = $"\\b{words[i]}\\b";
                 int numberOfWords = Regex.Matches(text, pattern, RegexOptions.IgnoreCase).Count;
 
-                if (!keyValuePairs.Any(word => word.Key == words[i]))
+                if (!wordsAndFrec.Any(word => word.Key == words[i]))
                 {
                     double freq = (double)numberOfWords / (words.Length);
-                    keyValuePairs.Add(new KeyValuePair<string, double>(words[i], freq)); 
+                    wordsAndFrec.Add(new KeyValuePair<string, double>(words[i], freq)); 
                 }
             }
 
-            return keyValuePairs;
+            return wordsAndFrec;
         }
 
-        static void PrintWords(List<KeyValuePair<string, double>> wordsList, int count)
+        static void PrintWords(List<KeyValuePair<string, double>> wordsList)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < wordsList.Count; i++)
             {
                 Console.WriteLine($"{wordsList[i].Key,-13} {wordsList[i].Value*100:0.00}%");
             }
