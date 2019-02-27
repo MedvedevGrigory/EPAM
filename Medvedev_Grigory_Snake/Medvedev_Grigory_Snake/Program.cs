@@ -12,6 +12,7 @@ namespace Medvedev_Grigory_Snake
         static void Main(string[] args)
         {
             Console.SetBufferSize(120, 30);
+            Console.CursorVisible = false;
 
             Walls walls = new Walls(120, 30);
             walls.Draw();
